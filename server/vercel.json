@@ -3,7 +3,13 @@
   "builds": [{ "src": "*.js", "use": "@vercel/node" }],
   "routes": [
     {
-      "src": "public/uploads/(.*)",
+      "src": "/posts",
+      "methods": ["POST"],
+      "dest": "public/uploads/$1"
+    },
+    {
+      "src": "/posts/(.*)",
+      "methods": ["PUT"],
       "dest": "public/uploads/$1"
     },
     {
