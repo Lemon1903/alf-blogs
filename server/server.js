@@ -10,7 +10,7 @@ connectDb();
 const cors = require("cors");
 app.use(
   cors({
-    origin: "*",
+    origin: ["https://alf-blogs-fe.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
