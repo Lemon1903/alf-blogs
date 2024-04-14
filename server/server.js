@@ -1,20 +1,27 @@
 const express = require("express");
 const app = express();
-const connectDb = require('./config/db');
+const connectDb = require("./config/db");
 require("dotenv").config();
 const PORT = process.env.PORT ?? 5000;
 const { errorHandler } = require("./middleware/errorMiddleware");
 
-// Connect Database 
+// Connect Database
 connectDb();
-const cors = require('cors');
-app.use(cors());
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 // this allows the controller to get `body.request`
-app.use(express.json({limit: '25mb'}));
+app.use(express.json({ limit: "25mb" }));
 
 // Serve static files from the public directory
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -22,7 +29,7 @@ app.get("/", (req, res) => {
 
 // Post Routes:
 const postRouter = require("./routers/post");
-app.use('/posts', postRouter)
+app.use("/posts", postRouter);
 
 // Use Error Middleware:
 app.use(errorHandler);
