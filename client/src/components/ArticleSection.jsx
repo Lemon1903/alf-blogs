@@ -35,6 +35,7 @@ export const articleCreateAction = async ({ request }) => {
   newFormData.append("author", formData.get("author"));
   newFormData.append("cover_photo", formData.get("cover_photo"));
   newFormData.append("content", localStorage.getItem("content"));
+  console.log("New FormData:", Object.fromEntries(newFormData));
 
   const response = await fetch(`${API_URL}/posts`, {
     method: "POST",
@@ -43,6 +44,7 @@ export const articleCreateAction = async ({ request }) => {
 
   if (!response.ok) throw response;
   const data = await response.json();
+  console.log("Data:", data);
   return redirect(`/article/${data._id}`);
 };
 
