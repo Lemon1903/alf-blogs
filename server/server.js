@@ -8,12 +8,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 // Connect Database
 connectDb();
 const cors = require("cors");
-app.use(
-  cors({
-    origin: "https://alf-blogs-fe.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+app.use(cors());
 
 // this allows the controller to get `body.request`
 app.use(express.json({ limit: "25mb" }));
